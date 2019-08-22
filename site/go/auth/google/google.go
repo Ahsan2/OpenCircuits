@@ -60,7 +60,7 @@ func (g authenticationMethod) ExtractIdentity(token string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return "google_" + tokenInfo.UserId, nil
+	return "google_" + tokenInfo.UserID, nil
 }
 
 func (g authenticationMethod) AuthHeaderPrefix() string {

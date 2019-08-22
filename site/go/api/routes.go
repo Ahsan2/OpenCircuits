@@ -10,8 +10,8 @@ import (
 	"strings"
 )
 
-func authenticatedHandler(manager auth.AuthenticationManager, handler func(c *gin.Context, userId model.UserId)) func (c *gin.Context) {
-	return func(c* gin.Context) {
+func authenticatedHandler(manager auth.AuthenticationManager, handler func(c *gin.Context, userID model.UserID)) func(c *gin.Context) {
+	return func(c *gin.Context) {
 		parts := strings.SplitN(c.GetHeader("auth"), " ", 2)
 		if len(parts) != 2 {
 			c.JSON(http.StatusBadRequest, nil)
@@ -35,10 +35,11 @@ func authenticatedHandler(manager auth.AuthenticationManager, handler func(c *gi
 	}
 }
 
-func pingHandler(c *gin.Context, userId model.UserId) {
-	c.JSON(http.StatusOK, fmt.Sprintf("Thank you for pinging: %s", userId))
+func pingHandler(c *gin.Context, userID model.UserID) {
+	c.JSON(http.StatusOK, fmt.Sprintf("Thank you for pinging: %s", userID))
 }
 
+// RegisterRoutes registers each GET call
 func RegisterRoutes(router *gin.Engine, manager auth.AuthenticationManager, csif interfaces.CircuitStorageInterfaceFactory) {
 	// TODO: api versioning
 	router.GET("/api/ping", authenticatedHandler(manager, pingHandler))

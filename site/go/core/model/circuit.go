@@ -2,9 +2,9 @@ package model
 
 // CircuitMetadata contains the non-content parts of the circuit
 type CircuitMetadata struct {
-	ID        CircuitId `xml:"id",json:"id"`
+	ID        CircuitID `xml:"id",json:"id"`
 	Name      string    `xml:"name",json:"name"`
-	Owner     UserId    `xml:"owner",json:"owner"`
+	Owner     UserID    `xml:"owner",json:"owner"`
 	Desc      string    `xml:"desc",json:"desc"`
 	Thumbnail string    `xml:"thumbnail",json:"thumbnail"`
 }
@@ -17,7 +17,7 @@ type CircuitDesigner struct {
 // Circuit is the top-level model
 type Circuit struct {
 	Metadata CircuitMetadata `xml:"metadata"`
-	Designer CircuitDesigner `xml:"designer"`
+	Designer CircuitDesigner `xml:"contents"`
 }
 
 // Update takes a client-supplied circuit and updates the server-side data.  This allows the circuit model to control

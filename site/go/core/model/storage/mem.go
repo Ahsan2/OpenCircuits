@@ -6,6 +6,7 @@ import (
 	"github.com/OpenCircuits/OpenCircuits/site/go/core/model"
 )
 
+// MemCircuitStorageInterfaceFactory factory for Mem Circuits Storage Interface
 type MemCircuitStorageInterfaceFactory struct {
 	memInterface *memCircuitStorage
 }
@@ -13,13 +14,14 @@ type MemCircuitStorageInterfaceFactory struct {
 // A simple, array-based circuit storage for testing and example circuits
 type memCircuitStorage struct {
 	m      []model.Circuit
-	nextId model.CircuitId
+	nextID model.CircuitID
 }
 
-func (mem *memCircuitStorage) inStore(id model.CircuitId) bool {
+func (mem *memCircuitStorage) inStore(id model.CircuitID) bool {
 	return id < int64(len(mem.m))
 }
 
+// CreateCircuitStorageInterface creates a circuit storage interface
 func (m *MemCircuitStorageInterfaceFactory) CreateCircuitStorageInterface() interfaces.CircuitStorageInterface {
 	// Since the storage supports the interface this is fine.  For other kinds of storage, this pattern
 	//	of returning a single global object may not be suitable.
@@ -36,17 +38,17 @@ func (mem *memCircuitStorage) UpdateCircuit(c model.Circuit) {
 	mem.m[c.Metadata.ID] = c
 }
 
-func (mem *memCircuitStorage) EnumerateCircuits(userId model.UserId) []model.CircuitMetadata {
+func (mem *memCircuitStorage) EnumerateCircuits(userID model.UserID) []model.CircuitMetadata {
 	var ret []model.CircuitMetadata
 	for _, v := range mem.m {
-		if v.Metadata.Owner == userId {
+		if v.Metadata.Owner == userID {
 			ret = append(ret, v.Metadata)
 		}
 	}
 	return ret
 }
 
-func (mem *memCircuitStorage) LoadCircuit(id model.CircuitId) *model.Circuit {
+func (mem *memCircuitStorage) LoadCircuit(id model.CircuitID) *model.Circuit {
 	if !mem.inStore(id) {
 		return nil
 	}
@@ -55,9 +57,9 @@ func (mem *memCircuitStorage) LoadCircuit(id model.CircuitId) *model.Circuit {
 
 func (mem *memCircuitStorage) NewCircuit() model.Circuit {
 	var c model.Circuit
-	c.Metadata.ID = mem.nextId
+	c.Metadata.ID = mem.nextID
 	mem.m = append(mem.m, c)
-	mem.nextId++
+	mem.nextID++
 	return c
 }
 

@@ -82,7 +82,7 @@ func indexHandler(manager auth.AuthenticationManager, examplesCsif interfaces.Ci
 			"examples":  exampleCircuits,
 			"navConfig": navConfig,
 			"l":         loggedIn,
-			"userId":    userID,
+			"userID":    userID,
 			"authData":  authData,
 			"bundleJs":  getBustedName("./Bundle.js"),
 		})
