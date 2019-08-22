@@ -2,11 +2,11 @@ package model
 
 // CircuitMetadata contains the non-content parts of the circuit
 type CircuitMetadata struct {
-	ID        CircuitID `xml:"id",json:"id"`
-	Name      string    `xml:"name",json:"name"`
-	Owner     UserID    `xml:"owner",json:"owner"`
-	Desc      string    `xml:"desc",json:"desc"`
-	Thumbnail string    `xml:"thumbnail",json:"thumbnail"`
+	ID        CircuitID `xml:"id",        json:"id"`
+	Name      string    `xml:"name",      json:"name"`
+	Owner     UserID    `xml:"owner",     json:"owner"`
+	Desc      string    `xml:"desc",      json:"desc"`
+	Thumbnail string    `xml:"thumbnail", json:"thumbnail"`
 }
 
 // CircuitDesigner is a simple string until we need server-side analysis of circuit content
